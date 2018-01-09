@@ -1,0 +1,157 @@
+﻿@model WebTechProjectUsingSchemaFirst.user
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowProfile</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/profileView.css">
+
+</head>
+<body>
+
+    <div class="left">
+        <div class="map">
+            map
+        </div>
+        <div class="center">
+            <div class="info">
+                <table class="infotable">
+                    <tr>
+                        <td>
+                            <h3> UserType: </h3>
+                        </td>
+                        <td>
+                            <h1>
+                                <p id="id">
+                                    @Html.DisplayFor(model => model.type)
+
+                                </p>
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3> Id: </h3>
+                        </td>
+                        <td>
+                            <p id="id">
+                                @Html.DisplayFor(model => model.id)
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3> Name: </h3>
+                        </td>
+                        <td>
+                            <p id="id">
+                               @Html.DisplayFor(model => model.name)
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3> Email: </h3>
+                        </td>
+                        <td>
+                            <p id="id">
+                                @Html.DisplayFor(model => model.email)
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3> Address: </h3>
+                        </td>
+                        <td>
+                            <p id="id">
+                               @Html.DisplayFor(model => model.address)
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3> Gender: </h3>
+                        </td>
+                        <td>
+                            <p id="id">
+                                @Html.DisplayFor(model => model.gender)
+
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="image">
+                <img src="<?= base_url()  ?>/assets/img/<?= $id ?>.jpg">
+            </div>
+
+        </div>
+
+        <div class="option">
+            <table class="hovertable">
+                <tr>
+                    <th> User Menu</th>
+                </tr>
+                <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                    <td>
+                        <input type="button" value="Add Profile"
+                               onclick="location.href='<?= base_url() ?>/?profile_addProfile';">
+                    </td>
+                </tr>
+                <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                    <td>
+                        <input type="button" value="Show Profile"
+                               onclick="location.href='<?= base_url() ?>profileController/showProfiles';"></a>
+                    </td>
+                </tr>
+                <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                    <td>
+                        <input type="button" value="Change Password"
+                               onclick="location.href='<?= base_url() ?>/?profile_changePassword';"></a>
+                    </td>
+                </tr>
+                <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                    <td>
+                        <input type="button" value="Edit My Profile"
+                               onclick="location.href='<?= base_url() ?>/?profile_editProfile';"></a>
+                    </td>
+                </tr>
+                <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+                    <td>
+                        <input type="button" value="Go Home" onclick="location.href = '/Home/HomeView';"></a>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+
+
+
+</body>
+
+
+</html>
+<script>
+
+</script>

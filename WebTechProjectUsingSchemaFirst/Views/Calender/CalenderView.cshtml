@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CalenderView</title>
+    <script src="~/scripts/calender.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/calenderView.css">
+</head>
+<body onload="x()">
+    <div id="body">
+        <div id="calendar-container">
+            <div id="calendar-header">
+
+                <div id="calendar-month-year">
+
+                    <ul id="movebar">
+
+                        <li id="prev" onclick="prev()"> Previous</li>
+                        <li id="header"></li>
+                        <li id="next" onclick="next()"> Next</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div id="date">
+                <div id="calendar-dates">
+                </div>
+            </div>
+        </div>
+        <div id="f">
+            <a href="/Home/HomeView">Go Home</a>
+        </div>
+    </div>
+
+
+    <span id="test"></span>
+</body>
+</html>

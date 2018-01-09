@@ -1,0 +1,100 @@
+﻿@model WebTechProjectUsingSchemaFirst.appointment
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link href="~/Content/setEventView.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="body">
+        <form method="post" id="form1">
+
+
+            <h1> Add Event </h1>
+
+            <table align="center">
+                <tr>
+                    <td colspan="2">
+                        <input type="text" name="date" value="@Model.date"><br>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        Event Name:
+                    </td>
+                    <td>
+                        <input id="eventName" type="text" name="eventName" value="@Model.eventName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event At:
+                    </td>
+                    <td>
+                        <input id="at" type="text" name="at" value="@Model.at" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event Location:
+                    </td>
+                    <td>
+                        <input id="location" type="text" name="location" value="@Model.location" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Event With:
+                    </td>
+                    <td>
+                        <input id="with" type="text" name="with" value="@Model.with" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Short note:
+                    </td>
+                    <td>
+                        <textarea name="shortnote" cols="60" rows="4" ></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @*<input type="button" onclick="validate()" value="Submit" />*@
+                        <input type="submit" name="submit"/>
+                    </td>
+                </tr>
+
+
+            </table>
+        </form>
+    </div>
+
+    <div id="f" style="text-align:center;font-family: arial;font-size: 30px;">
+        <a href='/calender/CalenderView'>Back to calender</a>
+    </div>
+</body>
+
+</html>
+<script>
+        function validate() {
+            var event = document.getElementById("eventName");
+            var time = document.getElementById("time");
+            if (event.value != "" && time.value != "") {
+                var form = document.getElementById("form1");
+                form.submit();
+            }
+            else {
+                alert("Event name and time cannot be empty");
+
+            }
+        }
+</script>

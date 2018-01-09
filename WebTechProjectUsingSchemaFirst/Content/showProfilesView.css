@@ -1,0 +1,55 @@
+html {
+    min-width: 100%;
+    min-height: 100%;
+    background-position: top center;
+    background-color: 	#2F4F4F;
+}
+#body{
+    background-color: lightblue;
+    margin:auto;
+    border:3px solid black;
+}
+#header{
+    float:left;
+    text-align:center;
+}
+#tab{
+
+    display: inline-block;
+    margin:0 auto;
+    width:60%;
+    height:auto;
+}
+#f{
+    align:center;
+    text-align:center;
+    font-family: arial;
+    font-size: 30px;
+}
+h1{
+    text-align:left;
+}
+table {
+    border-collapse: collapse;
+    width: auto;
+
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-family: arial;
+    font-size: 20px;
+}
+#e{
+    background-color: 	#D2B48C;
+    padding:10px;
+    font-family: arial;
+    font-size: 20px;
+    width:150px;
+}
+#e:hover {
+    background-color: #555;
+    color: white;
+}

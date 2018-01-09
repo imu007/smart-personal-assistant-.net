@@ -1,0 +1,192 @@
+﻿@model IEnumerable <WebTechProjectUsingSchemaFirst.appointment>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomeView</title>
+    <script src="~/scripts/clock.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/homeView.css">
+</head>
+<body >
+    <div id="body">
+
+
+        <div id="header">
+            <table border="0" width="100%">
+                <tr>
+                    <td>
+                        <ul id="menubar">
+                            <li>@Html.ActionLink("Home", "HomeView", "Home")</li>
+                            <li><a href="/www.wikipedia.org">Wikipedia</a></li>
+                            <li><a href="/Profile/ProfileView">Profile</a></li>
+                            <li><a href="/calender/CalenderView">Calender</a></li>
+                            <li><a href="/homeController/index">Contact List</a></li>
+
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="mid">
+
+            <div id="left">
+                <ul id="navbar">
+
+                    <li><a href="https:\\www.gmail.com" target="_blank">G-mail</a></li>
+                    <li><a href="https:\\mail.yahoo.com" target="_blank">Y-mail</a></li>
+                    <li><a href="https://outlook.live.com/owa/" target="_blank">OutLook</a></li>
+                    <li><a href="https:\\www.Youtube.com" target="_blank">YouTube</a></li>
+                    <li><a href="https:\\www.facebook.com" target="_blank">FaceBook</a></li>
+                    <li><a href="https:\\www.google.com" target="_blank">GooGle</a></li>
+                    <li><a href="#" target="_blank">Free</a></li>
+
+
+                </ul>
+                <h1> Notes </h1>
+                <div id="notes">
+                    <textarea name="note" id="note" rows="10" cols="20" onkeyup="saveNote()"> @ViewBag.note </textarea>
+                </div>
+            </div>
+
+
+            <div id="center">
+
+                <?php
+
+
+                ?>
+                <table class="event" width="100%">
+                    <tr>
+                        <td colspan="6" width="90%">
+                            <h1>Today's Work</h1>
+                        </td>
+                        <td colspan="2">
+                            Date:@ViewBag.today
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Event Name</td>
+                        <td>Event Time</td>
+                        <td>Location</td>
+                        <td>With</td>
+                        <td>Notes</td>
+                        <td>Comments</td>
+                        <td>note</td>
+                    </tr>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.eventName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.at)</td>
+                            <td>@Html.DisplayFor(modelItem => item.location)</td>
+                            <td>@Html.DisplayFor(modelItem => item.with)</td>
+                            <td>@Html.DisplayFor(modelItem => item.shortNote)</td>
+                            <td><input type="text" name="comment" value="@Html.DisplayFor(modelItem => item.comment)"/> </td>
+                            <td>@Html.DisplayFor(modelItem => item.user.note)</td>
+                            <td><a href="/Calender/EditEvent?id=@item.Id">Edit</a> |
+                                    @Html.ActionLink("Delete", "DeleteEvent","Calender", new { id = item.Id }) </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div id="side">
+                <div id="logout">
+
+                    <a onclick="logout()">logout</a>
+
+                </div>
+                <div id="time">
+                    <table border="0">
+                        <tr>
+
+                            <td>
+                                <span id="hr"> 00 </span>
+                                <span> : </span>
+                                <span id="min"> 00 </span>
+                                <span> : </span>
+                                <span id="sec"> 00 </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div id="dic">
+                    <h3> English To Bengali </h3>
+                    <form action='http://dictionary.cambridge.org/search/british/direct/?utm_source=widget_searchbox_source&utm_medium=widget_searchbox&utm_campaign=widget_tracking'
+                          method='post' target="_blank">
+                        <table>
+
+                            <tr>
+                                <td colspan='2'></td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name='q' />
+                                </td>
+                                <td>
+                                    <input type='submit' value='Look it up' />
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+
+                </div>
+                <div id="weather">
+                    <h3> Weather of Dhaka </h3>
+                    <script language="JavaScript" type="text/javascript">
+                    document.write('<script language="JavaScript" src="https://www.worldweatheronline.com/widget/v4/weather-widget.ashx?q=Dhaka%2c+Bangladesh&width=220&custom_header=Dhaka, Bangladesh&num_of_day=2&title_bg_color=020202&title_text_color=C4FFD6&widget_bg_color=FFFFFF&widget_text_color=020202&type=js&icon=0&cb=' + Math.random() + '" type="text/javascript"><\/scr' + 'ipt>');
+                    </script>
+                    <noscript>
+                        <a href="https://www.worldweatheronline.com" alt="Dhaka, Bangladesh weather">
+                            7 day Dhaka,
+                            Bangladesh weather
+                        </a> provided by <a href="https://www.worldweatheronline.com">
+                            World Weather
+                            Online
+                        </a>
+                    </noscript>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</body>
+</html>
+<script>
+
+    function logout() {
+        window.location.href = "homeController/logout";
+    }
+    function saveNote() {
+        var noteField = document.getElementById('note');
+        //var noteForm=document.getElementById('formNote');
+        var noteReq = new XMLHttpRequest();
+        noteReq.open("GET", "home.php?note=" + noteField.value, true);
+        noteReq.send();
+    }
+    function saveComment(id, time) {
+        var comment = document.getElementById(id);
+        var commentReq = new XMLHttpRequest();
+        commentReq.open("POST", "home.php?time=" + time + "&comment=" + comment.value, true);
+        commentReq.send();
+
+    }
+</script>

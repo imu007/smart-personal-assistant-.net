@@ -1,0 +1,29 @@
+
+html {
+    min-width: 100%;
+    min-height: 100%;
+    background-position: top center;
+    background-color: #2F4F4F;
+}
+
+#body {
+
+    background-color: lightblue;
+}
+
+table {
+    border-collapse: collapse;
+    width: auto;
+
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+h1 {
+
+    text-align: center;
+}

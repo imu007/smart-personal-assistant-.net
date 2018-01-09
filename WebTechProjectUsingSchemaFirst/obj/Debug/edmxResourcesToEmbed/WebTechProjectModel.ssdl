@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="webTechprojectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="contactInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="50" />
+    <Property Name="companyname" Type="varchar" MaxLength="50" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="eventName" Type="varchar" MaxLength="50" />
+    <Property Name="at" Type="time" Precision="7" />
+    <Property Name="location" Type="nchar" MaxLength="10" />
+    <Property Name="with" Type="varchar" MaxLength="50" />
+    <Property Name="shortNote" Type="varchar" MaxLength="50" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+    <Property Name="comment" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="type" Type="varchar" MaxLength="5" />
+    <Property Name="address" Type="varchar" MaxLength="50" />
+    <Property Name="gender" Type="varchar" MaxLength="6" />
+    <Property Name="note" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_contactInfo_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="contactInfo" Type="Self.contactInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contactInfo">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_events_ToTable">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="events" Type="Self.events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="events">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="webTechprojectDBModelStoreContainer">
+    <EntitySet Name="contactInfo" EntityType="Self.contactInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="events" EntityType="Self.events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_contactInfo_users" Association="Self.FK_contactInfo_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="contactInfo" EntitySet="contactInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_events_ToTable" Association="Self.FK_events_ToTable">
+      <End Role="users" EntitySet="users" />
+      <End Role="events" EntitySet="events" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

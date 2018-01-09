@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="webTechprojectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="contactInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="companyname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="Self.FK_contactInfo_users" FromRole="contactInfo" ToRole="users" />
+  </EntityType>
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="eventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="at" Type="Time" Precision="7" />
+    <Property Name="location" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="with" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="shortNote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="Self.FK_events_ToTable" FromRole="events" ToRole="users" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="contactInfoes" Relationship="Self.FK_contactInfo_users" FromRole="users" ToRole="contactInfo" />
+    <NavigationProperty Name="events" Relationship="Self.FK_events_ToTable" FromRole="users" ToRole="events" />
+  </EntityType>
+  <Association Name="FK_contactInfo_users">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="contactInfo" Type="Self.contactInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="contactInfo">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_events_ToTable">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="events" Type="Self.event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="events">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="webTechprojectDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="contactInfoes" EntityType="Self.contactInfo" />
+    <EntitySet Name="events" EntityType="Self.event" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK_contactInfo_users" Association="Self.FK_contactInfo_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="contactInfo" EntitySet="contactInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_events_ToTable" Association="Self.FK_events_ToTable">
+      <End Role="users" EntitySet="users" />
+      <End Role="events" EntitySet="events" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
